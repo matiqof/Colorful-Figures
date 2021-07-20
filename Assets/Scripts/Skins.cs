@@ -66,8 +66,8 @@ public class Skins : MonoBehaviour
         
         if (_reviewSkinIndex < 0) _reviewSkinIndex = skinsSprites.Count - 1;
         else if (_reviewSkinIndex > skinsSprites.Count - 1) _reviewSkinIndex = 0;
-        
-        if (PlayerPrefs.GetInt("skin") == _reviewSkinIndex) _reviewSkinIsTaken = true;
+
+        _reviewSkinIsTaken = PlayerPrefs.GetInt("skin") == _reviewSkinIndex;
         
         reviewSkinImage.sprite = skinsSprites[_reviewSkinIndex];
 
@@ -97,21 +97,21 @@ public class Skins : MonoBehaviour
     
     public void GetOrBuySkin()
     {
-        if (_mySkins[_reviewSkinIndex].Equals("false")) BuySkin(_reviewSkinIndex);
-        else TakeSkin(_reviewSkinIndex);
+        if (_mySkins[_reviewSkinIndex].Equals("false")) BuySkin();
+        else TakeSkin();
     }
     
-    private void BuySkin(int index)
+    private void BuySkin()
     {
-        if (PlayerPrefs.GetInt("score") >= skinsCosts[index])
+        if (PlayerPrefs.GetInt("score") >= skinsCosts[_reviewSkinIndex])
         {
-            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - skinsCosts[index]);
+            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - skinsCosts[_reviewSkinIndex]);
             
             PlayerPrefs.Save();
 
-            _mySkins[index] = "true";
+            _mySkins[_reviewSkinIndex] = "true";
             
-            UpdateSkinText(_mySkins[index], _reviewSkinIsTaken, skinsCosts[index]);
+            UpdateSkinText(_mySkins[_reviewSkinIndex], _reviewSkinIsTaken, skinsCosts[_reviewSkinIndex]);
 
             SetMySkins();
             
@@ -119,25 +119,29 @@ public class Skins : MonoBehaviour
         } else scoreTextAnimator.SetTrigger(NotEnoughScore);
     }
     
-    private void TakeSkin(int index)
+    private void TakeSkin()
     {
-        PlayerPrefs.SetInt("skin", index);
+        PlayerPrefs.SetInt("skin", _reviewSkinIndex);
+        
+        PlayerPrefs.Save();
         
         _reviewSkinIsTaken = true;
         
-        UpdateSkinText(_mySkins[index], _reviewSkinIsTaken, skinsCosts[index]);
+        UpdateSkinText(_mySkins[_reviewSkinIndex], _reviewSkinIsTaken, skinsCosts[_reviewSkinIndex]);
     }
     
     private void SetMySkins()
     {
         var str = "";
         
-        for (var i = 1; i < skinsSprites.Count; i++)
+        for (var i = 0; i < skinsSprites.Count; i++)
         {
             str += _mySkins[i] + " ";
         }
         
         PlayerPrefs.SetString("mySkins", str);
+        
+        PlayerPrefs.Save();
     }
     
     private void UpdateSkinText(string isMySkin, bool isTaken, int cost)

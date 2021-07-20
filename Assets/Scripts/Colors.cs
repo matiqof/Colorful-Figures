@@ -45,7 +45,7 @@ public class Colors : MonoBehaviour
         
         _reviewColorIndex = col;
 
-        if (PlayerPrefs.GetInt("color") == _reviewColorIndex) _reviewColorIsTaken = true;
+        _reviewColorIsTaken = PlayerPrefs.GetInt("skin") == _reviewColorIndex;
 
         reviewColorImage.color = colorsValues[col];
         
@@ -75,21 +75,21 @@ public class Colors : MonoBehaviour
     
     public void GetOrBuyColor()
     {
-        if (_myColors[_reviewColorIndex].Equals("false")) BuyColor(_reviewColorIndex);
-        else TakeColor(_reviewColorIndex);
+        if (_myColors[_reviewColorIndex].Equals("false")) BuyColor();
+        else TakeColor();
     }
     
-    private void BuyColor(int index)
+    private void BuyColor()
     {
-        if (PlayerPrefs.GetInt("score") >= colorsCosts[index])
+        if (PlayerPrefs.GetInt("score") >= colorsCosts[_reviewColorIndex])
         {
-            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - colorsCosts[index]);
+            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - colorsCosts[_reviewColorIndex]);
             
             PlayerPrefs.Save();
 
-            _myColors[index] = "true";
+            _myColors[_reviewColorIndex] = "true";
             
-            UpdateColorText(_myColors[index], _reviewColorIsTaken, colorsCosts[index]);
+            UpdateColorText(_myColors[_reviewColorIndex], _reviewColorIsTaken, colorsCosts[_reviewColorIndex]);
 
             SetMyColors();
             
@@ -97,25 +97,29 @@ public class Colors : MonoBehaviour
         } else scoreTextAnimator.SetTrigger(NotEnoughScore);
     }
     
-    private void TakeColor(int index)
+    private void TakeColor()
     {
-        PlayerPrefs.SetInt("color", index);
+        PlayerPrefs.SetInt("color", _reviewColorIndex);
+        
+        PlayerPrefs.Save();
         
         _reviewColorIsTaken = true;
         
-        UpdateColorText(_myColors[index], _reviewColorIsTaken, colorsCosts[index]);
+        UpdateColorText(_myColors[_reviewColorIndex], _reviewColorIsTaken, colorsCosts[_reviewColorIndex]);
     }
     
     private void SetMyColors()
     {
         var str = "";
         
-        for (var i = 1; i < colorsValues.Count; i++)
+        for (var i = 0; i < colorsValues.Count; i++)
         {
             str += _myColors[i] + " ";
         }
         
         PlayerPrefs.SetString("myColors", str);
+        
+        PlayerPrefs.Save();
     }
     
     private void UpdateColorText(string isMyColor, bool isTaken, int cost)

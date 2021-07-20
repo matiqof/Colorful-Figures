@@ -6368,6 +6368,8 @@ MonoBehaviour:
   scoreTextMainMenu: {fileID: 651034852}
   scoreTextCustomize: {fileID: 1207605750}
   maxScoreTextMainMenu: {fileID: 1191947109}
+  earnedScoreTextPause: {fileID: 0}
+  earnedScoreTextGame: {fileID: 0}
 --- !u!114 &1210556919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6383,8 +6385,6 @@ MonoBehaviour:
   soundsToggle: {fileID: 916094862}
   graphicsToggle: {fileID: 397095980}
   volumeSlider: {fileID: 424658916}
-  _music: {fileID: 0}
-  _sounds: {fileID: 0}
 --- !u!114 &1210556920
 MonoBehaviour:
   m_ObjectHideFlags: 0
