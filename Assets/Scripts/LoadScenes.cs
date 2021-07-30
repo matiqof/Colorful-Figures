@@ -14,6 +14,8 @@ public class LoadScenes : MonoBehaviour
 
     private IEnumerator UpdateScene(AsyncOperation async)
     {
+        //Ожидание оканчания анимации
+        
         async.allowSceneActivation = false;
 
         yield return new WaitForSeconds(time);

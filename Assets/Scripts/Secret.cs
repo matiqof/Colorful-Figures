@@ -16,6 +16,8 @@ public class Secret : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        //Проверка двойного нажатия
+        
         var currentTimeClick = eventData.clickTime;
         
         if(Mathf.Abs(currentTimeClick - _lastTimeClick) < 0.75f) FindSecret();

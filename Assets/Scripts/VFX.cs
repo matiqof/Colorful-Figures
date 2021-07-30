@@ -15,6 +15,8 @@ public class VFX : MonoBehaviour
 
     private void SpawnMusic()
     {
+        //Спавн объекта музыки
+        
         if (PlayerPrefs.HasKey("music")) return;
 
         Instantiate(musicPrefab);
@@ -24,6 +26,8 @@ public class VFX : MonoBehaviour
     
     private void SpawnSounds()
     {
+        //Спавн объекта звуков
+        
         if (PlayerPrefs.HasKey("sounds")) return;
 
         Instantiate(soundsPrefab);

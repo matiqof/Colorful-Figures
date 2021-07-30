@@ -28,6 +28,8 @@ public class Settings : MonoBehaviour
 
     private void SettingVolume()
     {
+        //Установка громкости
+        
         if (!PlayerPrefs.HasKey("volume")) PlayerPrefs.SetFloat("volume", 0.5f);
 
         volumeSlider.value = PlayerPrefs.GetFloat("volume");
@@ -39,6 +41,8 @@ public class Settings : MonoBehaviour
 
     private void SettingSounds()
     {
+        //Установка звуков
+        
         if (PlayerPrefs.GetString("vfx").Equals("")) PlayerPrefs.SetString("vfx", "true");
         else if (PlayerPrefs.GetString("vfx").Equals("true"))
         {
@@ -60,6 +64,8 @@ public class Settings : MonoBehaviour
     
     private void SettingGraphics()
     {
+        //Установка графики
+        
         if (PlayerPrefs.GetString("graphics").Equals("")) PlayerPrefs.SetString("graphics", "true");
         else if (PlayerPrefs.GetString("graphics").Equals("true"))
         {

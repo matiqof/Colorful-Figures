@@ -45,7 +45,7 @@ public class Colors : MonoBehaviour
         
         _reviewColorIndex = col;
 
-        _reviewColorIsTaken = PlayerPrefs.GetInt("skin") == _reviewColorIndex;
+        _reviewColorIsTaken = PlayerPrefs.GetInt("color") == _reviewColorIndex;
 
         reviewColorImage.color = colorsValues[col];
         
@@ -60,7 +60,7 @@ public class Colors : MonoBehaviour
         
         _myColors = new string[colorsValues.Count];
             
-        InitializeColors();
+        InitializeColors(); //Надо задать массив по умолчанию
     }
     
     private void InitializeColors()
@@ -75,31 +75,31 @@ public class Colors : MonoBehaviour
     
     public void GetOrBuyColor()
     {
-        if (_myColors[_reviewColorIndex].Equals("false")) BuyColor();
-        else TakeColor();
+        if (_myColors[_reviewColorIndex].Equals("false")) BuyColor(); //Фукнкиця покупки
+        else TakeColor(); //Фукнция взятия
     }
     
     private void BuyColor()
     {
         if (PlayerPrefs.GetInt("score") >= colorsCosts[_reviewColorIndex])
         {
-            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - colorsCosts[_reviewColorIndex]);
+            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - colorsCosts[_reviewColorIndex]); //Подсчет очков
             
             PlayerPrefs.Save();
 
-            _myColors[_reviewColorIndex] = "true";
+            _myColors[_reviewColorIndex] = "true"; //Задание выбранного цвета
             
             UpdateColorText(_myColors[_reviewColorIndex], _reviewColorIsTaken, colorsCosts[_reviewColorIndex]);
 
             SetMyColors();
             
-            displayScore.UpdateScoreText();
-        } else scoreTextAnimator.SetTrigger(NotEnoughScore);
+            displayScore.UpdateScoreText(); //Обновление очков
+        } else scoreTextAnimator.SetTrigger(NotEnoughScore); //Анимация малого количества очков
     }
     
     private void TakeColor()
     {
-        PlayerPrefs.SetInt("color", _reviewColorIndex);
+        PlayerPrefs.SetInt("color", _reviewColorIndex); //Задание выбранного цвета
         
         PlayerPrefs.Save();
         
@@ -110,6 +110,8 @@ public class Colors : MonoBehaviour
     
     private void SetMyColors()
     {
+        //Сохранения цветов
+        
         var str = "";
         
         for (var i = 0; i < colorsValues.Count; i++)

@@ -15,11 +15,15 @@ public class SceneTransition : MonoBehaviour
 
     public void Appear()
     {
+        //Анимация исчезания сцены
+        
         _animator.SetTrigger(Appear1);
     }
     
     public void Disappear()
     {
+        //Анимация появления сцены
+        
         _animator.SetTrigger(Disappear1);
     }
 }

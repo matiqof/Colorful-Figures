@@ -20,6 +20,8 @@ public class EdgesSeparation : MonoBehaviour
 
     private void Awake()
     {
+        //Задание положения границ в зависимости от разрешения экрана
+        
         _screenWidth = Screen.width;
         
         _screenHeight = Screen.height;

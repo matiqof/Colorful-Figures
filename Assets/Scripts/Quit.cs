@@ -11,6 +11,8 @@ public class Quit : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        //Выход из приложения и очистка памяти
+        
         PlayerPrefs.DeleteKey("music");
         
         PlayerPrefs.DeleteKey("sounds");

@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     private void PlayerMove()
     {
         _playerPosition = Vector2.Lerp(transform.position,
-            _mainCamera.ScreenToWorldPoint(Input.mousePosition), moveSpeed);
+            _mainCamera.ScreenToWorldPoint(Input.mousePosition), moveSpeed); //Плавное перемещение объекта за пальцем(мышкой)
 
         transform.position = _playerPosition;
     }

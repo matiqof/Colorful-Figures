@@ -20,6 +20,8 @@ public class Music : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Зацикливание музыки
+        
         if (Math.Abs(_source.time - _source.clip.length) < 0.1)
         {
             SetRandomMusic();

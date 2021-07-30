@@ -82,7 +82,7 @@ public class Skins : MonoBehaviour
         
         _mySkins = new string[skinsSprites.Count];
             
-        InitializeSkins();
+        InitializeSkins(); //Надо задать массив по умолчанию
     }
     
     private void InitializeSkins()
@@ -97,31 +97,31 @@ public class Skins : MonoBehaviour
     
     public void GetOrBuySkin()
     {
-        if (_mySkins[_reviewSkinIndex].Equals("false")) BuySkin();
-        else TakeSkin();
+        if (_mySkins[_reviewSkinIndex].Equals("false")) BuySkin(); //Фукнкиця покупки
+        else TakeSkin(); //Фукнция взятия
     }
     
     private void BuySkin()
     {
         if (PlayerPrefs.GetInt("score") >= skinsCosts[_reviewSkinIndex])
         {
-            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - skinsCosts[_reviewSkinIndex]);
+            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") - skinsCosts[_reviewSkinIndex]); //Подсчет очков
             
             PlayerPrefs.Save();
 
-            _mySkins[_reviewSkinIndex] = "true";
+            _mySkins[_reviewSkinIndex] = "true"; //Задание выбранного скины
             
             UpdateSkinText(_mySkins[_reviewSkinIndex], _reviewSkinIsTaken, skinsCosts[_reviewSkinIndex]);
 
             SetMySkins();
             
-            displayScore.UpdateScoreText();
-        } else scoreTextAnimator.SetTrigger(NotEnoughScore);
+            displayScore.UpdateScoreText(); //Обновление очков
+        } else scoreTextAnimator.SetTrigger(NotEnoughScore); //Анимация малого количества очков
     }
     
     private void TakeSkin()
     {
-        PlayerPrefs.SetInt("skin", _reviewSkinIndex);
+        PlayerPrefs.SetInt("skin", _reviewSkinIndex); //Задание выбранного скина
         
         PlayerPrefs.Save();
         
@@ -132,6 +132,8 @@ public class Skins : MonoBehaviour
     
     private void SetMySkins()
     {
+        //Сохранения скинов
+        
         var str = "";
         
         for (var i = 0; i < skinsSprites.Count; i++)

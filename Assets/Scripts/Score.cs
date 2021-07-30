@@ -36,11 +36,13 @@ public class Score : MonoBehaviour
     {
         _playerPosition = player.transform.position;
 
-        transform.position = new Vector2(_playerPosition.x, _playerPosition.y + followHeight); 
+        transform.position = new Vector2(_playerPosition.x, _playerPosition.y + followHeight); //Слежение текста за игроком
     }
 
     private void ReceiveScore()
     {
+        //При достижении определенного времени увеличивается скорость препятствий
+        
         if (!_work) return;
         
         if (score != 0 && score % increaseTime == 0 && obstacles.GETMoveSpeed() + increaseValue

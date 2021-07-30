@@ -24,10 +24,10 @@ public class Obstacles : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_obstacleObject.transform.position.x <= destroyPoint) DestroyObstacle();
+        if (_obstacleObject.transform.position.x <= destroyPoint) DestroyObstacle(); //Проверка вышел ли объект за границы экрана
     }
-    
-    void DestroyObstacle()
+
+    private void DestroyObstacle()
     {
         Destroy(_obstacleObject);
             
@@ -41,12 +41,14 @@ public class Obstacles : MonoBehaviour
         var pos = Random.Range(1, 4);
         
         _obstacleObject = Instantiate(obstaclesObjects[index], 
-            Vector3.zero, new Quaternion(0, 0, 0, 0));
+            Vector3.zero, new Quaternion(0, 0, 0, 0)); //Создание объекта
 
         _obstacleRigidbody2D = _obstacleObject.GetComponent<Rigidbody2D>();
 
-        switch (pos)
+        switch (pos) //Задание свойств в зависимости от позиции
         {
+            //1: Верх, 2: Низ, 3: Середина
+            
             case 1:
             {
                 _obstacleObject.transform.localScale = new Vector3(Random.Range(0.4f, 0.6f), Random.Range(0.4f, 0.8f), 0);
