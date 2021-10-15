@@ -17,7 +17,7 @@ public class Obstacles : MonoBehaviour
 
     private Rigidbody2D _obstacleRigidbody2D;
 
-    private void Start()
+    private void Awake()
     {
         SpawnObstacle();
     }
@@ -95,7 +95,7 @@ public class Obstacles : MonoBehaviour
 
     public void UpdateMoveSpeed(float speed)
     {
-        _obstacleRigidbody2D.velocity = new Vector2(-speed, 0);
+        if (_obstacleRigidbody2D != null) _obstacleRigidbody2D.velocity = new Vector2(-speed, 0);
     }
 
     public void SetMoveSpeed(float speed)

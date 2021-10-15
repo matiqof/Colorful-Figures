@@ -16,6 +16,8 @@ public class Pause : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private DisplayScore displayScore;
 
+    [SerializeField] private Begin begin;
+
     private bool _pause;
 
     private bool _inProgress;
@@ -32,7 +34,7 @@ public class Pause : MonoBehaviour, IPointerClickHandler
         
         var currentTimeClick = eventData.clickTime;
         
-        if(Mathf.Abs(currentTimeClick - _lastTimeClick) < 0.75f && !_inProgress) StartCoroutine(UpdatePauseMenu(true));
+        if(Mathf.Abs(currentTimeClick - _lastTimeClick) < 0.75f && !_inProgress  && begin.GETBegin()) StartCoroutine(UpdatePauseMenu(true));
         
         _lastTimeClick = currentTimeClick;
     }
